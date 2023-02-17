@@ -80,18 +80,24 @@ class _WelcomeScreenState extends State<WelcomeScreen>
             const SizedBox(
               height: 90,
             ),
-            BrandButton(title: "Login",color: Colors.lightBlueAccent,onPressed: () => 
-            Navigator.pushNamed(context, LoginScreen.id),),
+            BrandButton(
+                title: "Login",
+                color: Colors.lightBlueAccent,
+                onPressed: () {
+                  Navigator.pushNamed(context, LoginScreen.id);
+                }),
             const SizedBox(
               height: 25,
             ),
-            BrandButton(title: "Register", color: Colors.blueAccent,onPressed: () => 
-            Navigator.pushNamed(context, RegistrationScreen.id),),
+            BrandButton(
+                title: "Register",
+                color: Colors.blueAccent,
+                onPressed: () {
+                  Navigator.pushNamed(context, RegistrationScreen.id);
+                }),
           ],
         ),
       ),
     );
   }
 }
-
-
