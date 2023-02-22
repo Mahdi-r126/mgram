@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:mgram/Helpers/chatHelper.dart';
 import 'package:mgram/screens/loginScreen.dart';
 
 import '../constants.dart';
@@ -18,6 +19,7 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   final _auth = FirebaseAuth.instance;
   late User loggedInUser;
+  late String messageText;
 
   @override
   void initState() {
@@ -68,14 +70,14 @@ class _ChatScreenState extends State<ChatScreen> {
                   Expanded(
                     child: TextField(
                       onChanged: (value) {
-                        //Do something with the user input.
+                        messageText = value;
                       },
                       decoration: mMessageTextFieldDecoration,
                     ),
                   ),
                   MaterialButton(
                     onPressed: () {
-                      //Implement send functionality.
+                      ChatHelper.sendMessage(messageText, loggedInUser);
                     },
                     child: const Text(
                       'Send',
