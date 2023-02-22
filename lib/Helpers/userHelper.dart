@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -24,19 +25,25 @@ class UserHelper {
 
   static Future RegisterUser(
       String email, String password, String name, BuildContext context) async {
-
-        showDialog(
+    showDialog(
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) =>
             const ProgressDialog(status: "please wait..."));
 
     await Firebase.initializeApp();
+    final FirebaseFirestore _userFireStore = FirebaseFirestore.instance;
     final FirebaseAuth _auth = FirebaseAuth.instance;
     try {
-      final newUser = await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
+      final newUser = (await _auth.createUserWithEmailAndPassword(
+              email: email, password: password))
+          .user;
       if (newUser != null) {
+        _userFireStore
+            .collection('users')
+            .doc(newUser.uid.toString())
+            .set({'email': email, 'name': name});
+
         Navigator.pop(context);
         Navigator.popAndPushNamed(context, ChatScreen.id);
       }

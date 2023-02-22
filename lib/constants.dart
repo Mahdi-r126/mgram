@@ -9,12 +9,14 @@ const mSendButtonTextStyle = TextStyle(
 const mMessageTextFieldDecoration = InputDecoration(
   contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
   hintText: 'Type your message here...',
+  hintStyle: TextStyle(color: Colors.white, fontFamily: "vazir"),
   border: InputBorder.none,
 );
 
 const mMessageContainerDecoration = BoxDecoration(
+  color: Colors.black54,
   border: Border(
-    top: BorderSide(color: Colors.lightBlueAccent, width: 2.0),
+    top: BorderSide(color: Colors.blue, width: 2.0),
   ),
 );
 
